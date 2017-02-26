@@ -38,4 +38,5 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
    }
 }
 ```
-
+# Note
+Please creadit the developer in your app if you like the library
