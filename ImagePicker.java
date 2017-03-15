@@ -182,18 +182,18 @@ public class ImagePicker {
         }
         return bm;
     }
+    
+    public static String writeImage(Context context, Bitmap image, String imageName) {
 
-        public static String writeImage(Context context, Bitmap image, String imageName) {
-
-        File dir = new File(getBannerImageFolder(context));
+        File dir = new File(getImageFolder(context));
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        
-        String fileName = getBannerImageDir(context,imageName);
+
+        String fileName = getImageDir(context, imageName);
 
         byte[] byteArray = bitmapToByteArray(image);
-        
+
         if (saveToInternalPrivately(fileName, byteArray)) {
             Log.d(KEY_CLASS_NAME, "writeImage: Path: " + fileName);
         } else {
@@ -201,11 +201,12 @@ public class ImagePicker {
         }
         return fileName;
     }
+
     public static Bitmap readImage(Context context, String imageName) {
 
         Bitmap bmImg = null;
-        String imageDir = getBannerImageDir(context,imageName);
-        
+        String imageDir = getImageDir(context, imageName);
+
         if (new File(imageDir).exists()) {
             Log.d(KEY_CLASS_NAME, "readImage: found image to use ");
             Log.d(KEY_CLASS_NAME, imageDir);
@@ -214,50 +215,16 @@ public class ImagePicker {
         return bmImg;
     }
 
-    
-    private static String getBannerImageDir(Context context, String imageName) {
+
+    private static String getImageDir(Context context, String imageName) {
         return context.getFilesDir().getPath()
                 + "/storage/images"
                 + "/" + imageName
                 + ".jpeg";
     }
 
-    private static String getBannerImageFolder(Context context) {
+    private static String getImageFolder(Context context) {
         return context.getFilesDir().getPath()
                 + "/storage/images";
-    }
-
-    private static byte[] bitmapToByteArray(Bitmap image) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        try {
-            image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        } finally {
-            try {
-                stream.flush();
-                stream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return stream.toByteArray();
-    }
-
-    private static boolean saveToInternalPrivately(String pathWithName, byte[] byteArray) {
-        boolean done = false;
-        try {
-            FileOutputStream fos = new FileOutputStream(
-                    new File(pathWithName), true); // true will be same as Context.MODE_APPEND
-            try {
-                fos.write(byteArray);
-                fos.flush();
-                done = true;
-            } finally {
-                fos.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            done = false;
-        }
-        return done;
     }
 }
