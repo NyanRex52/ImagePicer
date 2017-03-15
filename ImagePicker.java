@@ -1,3 +1,8 @@
+/**
+ * Created by Mohammed Ibrahim Al-Safwan on 2016-06-01.
+ * Contact me at :nyanrex52@gmail.com
+ */
+
 public class ImagePicker {
     private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;        // min pixels
     private static final String KEY_CLASS_NAME = "ImagePicker";
