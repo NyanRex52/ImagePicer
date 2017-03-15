@@ -227,4 +227,39 @@ public class ImagePicker {
         return context.getFilesDir().getPath()
                 + "/storage/images";
     }
+    
+    private static byte[] bitmapToByteArray(Bitmap image) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        try {
+            image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        } finally {
+            try {
+                stream.flush();
+                stream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return stream.toByteArray();
+    }
+
+    private static boolean saveToInternalPrivately(String pathWithName, byte[] byteArray) {
+        boolean done = false;
+        try {
+            FileOutputStream fos = new FileOutputStream(
+                    new File(pathWithName), true); // true will be same as Context.MODE_APPEND
+            try {
+                fos.write(byteArray);
+                fos.flush();
+                done = true;
+            } finally {
+                fos.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            done = false;
+        }
+        return done;
+    }
+
 }
