@@ -49,4 +49,4 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     Bitmap bitmap = ImagePicker.readImage(getContext(), imageName);
 ```
 # Note
-Please creadit the developer in your app if you like the library
+Please creadit the developer in your app.
