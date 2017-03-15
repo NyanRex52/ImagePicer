@@ -1,4 +1,4 @@
-# ImagePicer
+# ImagePicker
 A simple Image picker for android to simplify the process of getting an image from different sources
 
 * Permissions:
