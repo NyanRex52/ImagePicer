@@ -38,5 +38,15 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
    }
 }
 ```
+* To Write a bitmap to jpeg:
+```
+    // Write Bitmap to /storage/images
+    String savedTo = ImagePicker.writeImage(getContext(), bitmap, imageName);
+```
+* To Read a jpeg into a bitmap:
+```
+    // Read Bitmap from /storage/images
+    Bitmap bitmap = ImagePicker.readImage(getContext(), imageName);
+```
 # Note
 Please creadit the developer in your app if you like the library
